@@ -135,7 +135,7 @@
                     "Header": "[parameters('header')]",
                     "IncludePath": "[parameters('includePath')]",
                     "Path": {
-                        "HttpUrl": "[parameters('httpUrl')]"
+                        "HttpUrl": "[parameters('test')]"
                     },
                     "Separator": "[parameters('separator')]",
                     "SourceType": "[parameters('sourceType')]"
@@ -162,7 +162,7 @@
                     "Header": "[parameters('header')]",
                     "IncludePath": "[parameters('includePath')]",
                     "Path": {
-                        "HttpUrl": "[parameters('httpUrl')]"
+                        "HttpUrl": "[parameters('train')]"
                     },
                     "Separator": "[parameters('separator')]",
                     "SourceType": "[parameters('sourceType')]"
