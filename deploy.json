@@ -10,14 +10,14 @@
         },
         "test": {
             "type": "String",
-            "defaultValue": "https://experienceazure.blob.core.windows.net/templates/ai-iad/part-00000test.parquet",
+            "defaultValue": "https://uhsnamihstorage.blob.core.windows.net/datasets/test.csv",
             "metadata": {
                 "description": "The Http URL."
             }
         },
         "train": {
             "type": "String",
-            "defaultValue": "https://experienceazure.blob.core.windows.net/templates/ai-iad/part-00000train.parquet",
+            "defaultValue": "https://uhsnamihstorage.blob.core.windows.net/datasets/train.csv",
             "metadata": {
                 "description": "The Http URL."
             }
