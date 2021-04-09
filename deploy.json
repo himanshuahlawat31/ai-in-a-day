@@ -8,16 +8,30 @@
                 "description": "Specifies the name of the Azure Machine Learning workspace which will hold this datastore target."
             }
         },
-        "httpUrl": {
+        "test": {
             "type": "String",
-            "defaultValue": "https://udacitystorage.blob.core.windows.net/nba-dataset/nba-2017-players-with-salary-wiki-twitter (4).csv",
+            "defaultValue": "https://experienceazure.blob.core.windows.net/templates/ai-iad/part-00000test.parquet",
             "metadata": {
                 "description": "The Http URL."
             }
         },
-        "datasetName": {
+        "train": {
             "type": "String",
-            "defaultValue": "Nba-Dataset",
+            "defaultValue": "https://experienceazure.blob.core.windows.net/templates/ai-iad/part-00000train.parquet",
+            "metadata": {
+                "description": "The Http URL."
+            }
+        },
+        "datasetNametest": {
+            "type": "String",
+            "defaultValue": "test",
+            "metadata": {
+                "description": "The name of the dataset."
+            }
+        },
+        "datasetNametrain": {
+            "type": "String",
+            "defaultValue": "train",
             "metadata": {
                 "description": "The name of the dataset."
             }
@@ -105,14 +119,41 @@
         }
     },
     "variables": {
-    "workspacename": "[concat('quick-starts-ws-',parameters('uniqueSuffix')) ]",
-    "computeinstancename": "[concat('notebook',parameters('uniqueSuffix'))]"
-    },
+        "workspacename": "[concat('ai-in-a-day-', parameters('uniqueSuffix'))]",
+        "computeinstancename": "[concat('notebook',parameters('uniqueSuffix'))]"
+        },
     "resources": [
         {
             "type": "Microsoft.MachineLearningServices/workspaces/datasets",
             "apiVersion": "2020-05-01-preview",
-            "name": "[concat(variables('workspaceName'), '/', parameters('datasetName'))]",
+            "name": "[concat(variables('workspaceName'), '/', parameters('datasetNametest'))]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "SkipValidation": "[parameters('skipValidation')]",
+                "DatasetType": "tabular",
+                "Parameters": {
+                    "Header": "[parameters('header')]",
+                    "IncludePath": "[parameters('includePath')]",
+                    "Path": {
+                        "HttpUrl": "[parameters('httpUrl')]"
+                    },
+                    "Separator": "[parameters('separator')]",
+                    "SourceType": "[parameters('sourceType')]"
+                },
+                "Registration": {
+                    "Description": "[parameters('datasetDescription')]",
+                    "Tags": "[parameters('tags')]"
+                },
+                "TimeSeries": {
+                    "FineGrainTimestamp": "[parameters('fineGrainTimestamp')]",
+                    "CoarseGrainTimestamp": "[parameters('coarseGrainTimestamp')]"
+                }
+            }
+        },
+        {
+            "type": "Microsoft.MachineLearningServices/workspaces/datasets",
+            "apiVersion": "2020-05-01-preview",
+            "name": "[concat(variables('workspaceName'), '/', parameters('datasetNametrain'))]",
             "location": "[parameters('location')]",
             "properties": {
                 "SkipValidation": "[parameters('skipValidation')]",
